@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from '../context/LanguageContext';
 
 export default function SearchModal() {
   const [open, setOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handler = () => setOpen(true);
@@ -27,7 +29,7 @@ export default function SearchModal() {
               type="button"
               className="btn bg-white btn-close"
               onClick={() => setOpen(false)}
-              aria-label="Close"
+              aria-label={t('common.close')}
             ></button>
           </div>
           <div className="modal-body d-flex align-items-center justify-content-center">
@@ -39,13 +41,13 @@ export default function SearchModal() {
                 setOpen(false);
               }}
             >
-              <label htmlFor="searchInput" className="visually-hidden">Search keyword</label>
+              <label htmlFor="searchInput" className="visually-hidden">{t('common.searchKeyword')}</label>
               <input
                 ref={inputRef}
                 type="text"
                 id="searchInput"
                 className="form-control bg-transparent border-primary p-3"
-                placeholder="Type search keyword"
+                placeholder={t('common.searchKeyword')}
               />
               <button className="btn btn-primary px-4" type="submit" aria-label="Search">
                 <i className="bi bi-search"></i>

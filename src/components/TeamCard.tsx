@@ -1,10 +1,13 @@
 import type { TeamMember } from '../types';
+import { useTranslation } from '../context/LanguageContext';
 
 interface TeamCardProps {
   member: TeamMember;
 }
 
 export default function TeamCard({ member }: TeamCardProps) {
+  const { t } = useTranslation();
+
   return (
     <div className="col-lg-4 wow slideInUp" data-wow-delay={`${member.delayTime}s`}>
       <div className="team-item bg-light rounded overflow-hidden">

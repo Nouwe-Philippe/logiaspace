@@ -1,23 +1,15 @@
 import { NavLink } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-
-const navbarLinks = [
-  { to: '/', label: 'Home' },
-  { to: '/about', label: 'About' },
-  { to: '/services', label: 'Services' },
-];
+import { useTranslation } from '../context/LanguageContext';
 
 const blogDropdownItems = [
-  { to: '/blog', label: 'Blog Grid' },
-  { to: '/detail', label: 'Blog Detail' },
+  { to: '/blog', labelKey: 'navbar.blogGrid' },
+  { to: '/detail', labelKey: 'navbar.blogDetail' },
 ];
 
 const pagesDropdownItems = [
-  { to: '/pricing', label: 'Pricing Plan' },
-  { to: '/features', label: 'Our Features' },
-  { to: '/team', label: 'Team Members' },
-  { to: '/testimonial', label: 'Testimonial' },
-  { to: '/quote', label: 'Free Quote' },
+  { to: '/privacy', labelKey: 'pages.privacyPolicy' },
+  { to: '/terms', labelKey: 'pages.termsOfService' },
 ];
 
 const socialLinks = [
@@ -31,6 +23,7 @@ const socialLinks = [
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const { language, setLanguage, t } = useTranslation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -58,6 +51,39 @@ export default function Navbar() {
               <small className="me-3 text-light"><i className="fa fa-map-marker-alt me-2"></i>Yaounde, Cameroun</small>
               <small className="me-3 text-light"><i className="fa fa-phone-alt me-2"></i>+237 676 507 052</small>
               <small className="text-light"><i className="fa fa-envelope-open me-2"></i>logiaspace@gmail.com</small>
+              {/* Language Selector */}
+              <div className="dropdown d-inline-block ms-3 position-static">
+                <button
+                  className="btn btn-sm border border-light bg-transparent text-light d-flex align-items-center gap-2 px-2 py-1 rounded-pill"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <i className="fa fa-globe text-warning"></i>
+                  <span className="d-none d-sm-inline small fw-medium">{language === 'fr' ? t('common.french') : t('common.english')}</span>
+                  <i className="fa fa-chevron-down text-light opacity-50 fs-6"></i>
+                </button>
+                <div className="dropdown-menu dropdown-menu-end border-0 shadow-lg rounded-2 overflow-hidden p-0 mt-2" style={{ minWidth: '180px', backgroundColor: '#1a1a1a' }}>
+                  {[
+                    { code: 'en', label: t('common.english'), flag: '🇺🇸' },
+                    { code: 'fr', label: t('common.french'), flag: '🇫🇷' },
+                  ].map((lng) => {
+                    const isActive = language === lng.code;
+                    return (
+                      <button
+                        key={lng.code}
+                        className={`dropdown-item d-flex align-items-center justify-content-between py-3 px-3 border-0 bg-transparent text-white text-decoration-none ${isActive ? 'bg-primary' : ''} transition`}
+                        onClick={() => setLanguage(lng.code as 'en' | 'fr')}
+                      >
+                        <span className="d-flex align-items-center gap-3">
+                          <span className="fs-4">{lng.flag}</span>
+                          <span className="small fw-medium">{lng.label}</span>
+                        </span>
+                        {isActive && <i className="fa fa-check text-white fs-6"></i>}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
           </div>
           <div className="col-lg-4 text-center text-lg-end">
@@ -95,7 +121,11 @@ export default function Navbar() {
           </button>
           <div className={`collapse navbar-collapse${isOpen ? ' show' : ''}`} id="navbarCollapse">
             <div className="navbar-nav ms-auto py-0">
-              {navbarLinks.map((link, i) => (
+              {[
+                { to: '/', labelKey: 'navbar.home' },
+                { to: '/about', labelKey: 'navbar.about' },
+                { to: '/services', labelKey: 'navbar.services' },
+              ].map((link, i) => (
                 <NavLink
                   key={i}
                   to={link.to}
@@ -103,29 +133,29 @@ export default function Navbar() {
                   onClick={() => setIsOpen(false)}
                   end={link.to === '/'}
                 >
-                  {link.label}
+                  {t(link.labelKey)}
                 </NavLink>
               ))}
               <div className="nav-item dropdown" onMouseEnter={handleDropdown} onMouseLeave={handleDropdown}>
                 <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                  Blog
+                  {t('navbar.blog')}
                 </a>
                 <div className="dropdown-menu m-0">
                   {blogDropdownItems.map((item, i) => (
                     <NavLink key={i} to={item.to} className="dropdown-item" onClick={() => setIsOpen(false)}>
-                      {item.label}
+                      {t(item.labelKey)}
                     </NavLink>
                   ))}
                 </div>
               </div>
               <div className="nav-item dropdown" onMouseEnter={handleDropdown} onMouseLeave={handleDropdown}>
                 <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                  Pages
+                  {t('navbar.pages')}
                 </a>
                 <div className="dropdown-menu m-0">
                   {pagesDropdownItems.map((item, i) => (
                     <NavLink key={i} to={item.to} className="dropdown-item" onClick={() => setIsOpen(false)}>
-                      {item.label}
+                      {t(item.labelKey)}
                     </NavLink>
                   ))}
                 </div>
@@ -135,7 +165,7 @@ export default function Navbar() {
                 className={({ isActive }) => `nav-item nav-link nav-contact${isActive ? ' active' : ''}`}
                 onClick={() => setIsOpen(false)}
               >
-                Contact
+                {t('navbar.contact')}
               </NavLink>
             </div>
           </div>

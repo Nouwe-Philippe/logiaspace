@@ -2,8 +2,11 @@ export interface Service {
   id: number;
   icon: string;
   name: string;
+  nameFr?: string;
   shortDescription?: string;
+  shortDescriptionFr?: string;
   description: string;
+  descriptionFr?: string;
   delayTime: number;
 }
 

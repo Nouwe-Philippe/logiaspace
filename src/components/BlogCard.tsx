@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useTranslation } from '../context/LanguageContext';
 
 interface BlogCardProps {
   title: string;
@@ -11,6 +12,8 @@ interface BlogCardProps {
 }
 
 export default function BlogCard({ title, category, author, date, image, excerpt, delay = '0.3s' }: BlogCardProps) {
+  const { t } = useTranslation();
+
   return (
     <div className="col-lg-4 wow slideInUp" data-wow-delay={delay}>
       <div className="blog-item bg-light rounded overflow-hidden">
@@ -32,7 +35,7 @@ export default function BlogCard({ title, category, author, date, image, excerpt
           <h4 className="mb-3">{title}</h4>
           <p>{excerpt}</p>
           <Link className="text-uppercase" to="/detail">
-            Read More <i className="bi bi-arrow-right"></i>
+            {t('common.readMore')} <i className="bi bi-arrow-right"></i>
           </Link>
         </div>
       </div>

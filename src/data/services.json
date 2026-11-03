@@ -4,45 +4,60 @@
       "id": 1,
       "icon": "fa-shield-alt",
       "name": "Cyber Security",
+      "nameFr": "Sécurité informatique",
       "description": "We protect your business from digital threats by implementing robust cybersecurity measures, ensuring your data and systems remain safe.",
+      "descriptionFr": "Nous protégeons votre entreprise contre les menaces numériques en mettant en place des mesures de cybersécurité robustes, garantissant que vos données et vos systèmes restent sûrs.",
       "delayTime": 0.3
     },
     {
       "id": 2,
       "icon": "fa-search",
       "name": "SEO Optimization",
+      "nameFr": "Optimisation SEO",
       "shortDescription": "Improve your online visibility",
+      "shortDescriptionFr": "Améliorez votre visibilité en ligne",
       "description": "Improve your website's visibility and ranking on search engines with our expert SEO strategies tailored for your business.",
+      "descriptionFr": "Améliorez la visibilité et le classement de votre site web sur les moteurs de recherche grâce à nos stratégies SEO expertes adaptées à votre entreprise.",
       "delayTime": 0.6
     },
     {
       "id": 3,
       "icon": "fa-globe",
       "name": "Web Development",
+      "nameFr": "Développement web",
       "description": "We design and develop responsive, user-friendly websites that showcase your brand and provide an exceptional digital experience.",
+      "descriptionFr": "Nous concevons et développons des sites web réactifs et conviviaux qui mettent en valeur votre marque et offrent une expérience digitale exceptionnelle.",
       "delayTime": 0.9
     },
     {
       "id": 4,
       "icon": "fa-mobile-alt",
       "name": "Mobile App Development",
+      "nameFr": "Développement d'applications mobiles",
       "shortDescription": "Build amazing mobile apps",
+      "shortDescriptionFr": "Créez des applications mobiles incroyables",
       "description": "Our team builds intuitive mobile applications for Android and iOS that engage users and drive business growth.",
-      "delayTime":0.3
+      "descriptionFr": "Notre équipe conçoit des applications mobiles intuitives pour Android et iOS qui engagent les utilisateurs et stimulent la croissance de votre entreprise.",
+      "delayTime": 0.3
     },
     {
       "id": 5,
       "icon": "fa-chart-bar",
       "name": "Data Analytics",
+      "nameFr": "Analyse de données",
       "description": "Transform raw data into actionable insights with our analytics solutions, helping your business make informed, strategic decisions.",
+      "descriptionFr": "Transformez les données brutes en insights exploitables grâce à nos solutions d'analyse, aidant votre entreprise à prendre des décisions éclairées et stratégiques.",
       "delayTime": 0.6
     },
     {
       "id": 6,
       "icon": "fa-paint-brush",
       "name": "UI/UX Design",
+      "nameFr": "Design UI/UX",
       "shortDescription": "Design delightful experiences",
+      "shortDescriptionFr": "Concevez des expériences agréables",
       "description": "Create beautiful and intuitive user interfaces that engage and delight your users.",
+      "descriptionFr": "Créez des interfaces utilisateur belles et intuitives qui engagent et enchantent vos utilisateurs.",
       "delayTime": 0.9
     }
   ]

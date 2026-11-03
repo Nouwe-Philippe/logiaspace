@@ -1,15 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { sendNewsletter } from '../utils/emailjs';
-
-const quickLinks = [
-  { to: '/', label: 'Home' },
-  { to: '/about', label: 'About Us' },
-  { to: '/services', label: 'Our Services' },
-  { to: '/team', label: 'Meet The Team' },
-  { to: '/blog', label: 'Latest Blog' },
-  { to: '/contact', label: 'Contact Us' },
-];
+import { useTranslation } from '../context/LanguageContext';
 
 const socialLinks = [
   { icon: 'fab fa-twitter', href: '#', label: 'Twitter' },
@@ -18,32 +10,15 @@ const socialLinks = [
   { icon: 'fab fa-instagram', href: '#', label: 'Instagram' },
 ];
 
-function LinksColumn({ title, className }: { title: string; className: string }) {
-  return (
-    <div className={className}>
-      <div className="section-title section-title-sm position-relative pb-3 mb-4">
-        <h3 className="text-light mb-0">{title}</h3>
-      </div>
-      <div className="link-animated d-flex flex-column justify-content-start">
-        {quickLinks.map((link, i) => (
-          <Link key={i} to={link.to} className="text-light mb-2">
-            <i className="bi bi-arrow-right text-primary me-2"></i>
-            {link.label}
-          </Link>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 export default function Footer() {
   const [email, setEmail] = useState('');
   const [sending, setSending] = useState(false);
+  const { t } = useTranslation();
 
   const handleNewsletter = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) {
-      alert('Please enter your email address.');
+      alert(t('common.yourEmail')); // fallback message
       return;
     }
     setSending(true);
@@ -68,23 +43,19 @@ export default function Footer() {
                 <Link to="/" className="navbar-brand">
                   <img src="/img/logo.png" alt="logiaspace" style={{ height: 75 }} />
                 </Link>
-                <p className="mt-3 mb-4">
-                  LogiaSpace is a digital solutions company specializing in web design, web development,
-                  and digital marketing. We help businesses build a strong online presence through
-                  innovative, secure, and performance-driven digital products.
-                </p>
+                <p className="mt-3 mb-4">{t('footer.about')}</p>
                 <form onSubmit={handleNewsletter} id="newsletterForm">
                   <div className="input-group">
                     <input
                       type="text"
                       name="from_email"
                       className="form-control border-white p-3"
-                      placeholder="Your Email"
+                      placeholder={t('footer.newsletterPlaceholder')}
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                     />
                     <button className="btn btn-dark" type="submit" disabled={sending}>
-                      {sending ? 'Sending...' : 'Sign Up'}
+                      {sending ? t('common.sending') : t('footer.signUp')}
                     </button>
                   </div>
                 </form>
@@ -94,7 +65,7 @@ export default function Footer() {
               <div className="row gx-5">
                 <div className="col-lg-4 col-md-12 pt-5 mb-5">
                   <div className="section-title section-title-sm position-relative pb-3 mb-4">
-                    <h3 className="text-light mb-0">Get In Touch</h3>
+                    <h3 className="text-light mb-0">{t('footer.getInTouch')}</h3>
                   </div>
                   <div className="d-flex mb-2">
                     <i className="bi bi-geo-alt text-primary me-2"></i>
@@ -116,8 +87,8 @@ export default function Footer() {
                     ))}
                   </div>
                 </div>
-                <LinksColumn title="Quick Links" className="col-lg-4 col-md-12 pt-0 pt-lg-5 mb-5" />
-                <LinksColumn title="Popular Links" className="col-lg-4 col-md-12 pt-0 pt-lg-5 mb-5" />
+                <LinksColumn title={t('footer.quickLinks')} className="col-lg-4 col-md-12 pt-0 pt-lg-5 mb-5" />
+                <LinksColumn title={t('footer.popularLinks')} className="col-lg-4 col-md-12 pt-0 pt-lg-5 mb-5" />
               </div>
             </div>
           </div>
@@ -129,7 +100,7 @@ export default function Footer() {
             <div className="col-lg-8 col-md-6">
               <div className="d-flex align-items-center justify-content-center" style={{ height: 75 }}>
                 <p className="mb-0">
-                  &copy; <a className="text-white border-bottom" href="#">LogiaSPace</a>. All Rights Reserved.{' '}
+                  &copy; <a className="text-white border-bottom" href="#">{t('footer.copyright')}</a>
                 </p>
               </div>
             </div>
@@ -139,4 +110,30 @@ export default function Footer() {
       {/* Footer End */}
     </>
   );
+
+  function LinksColumn({ title, className }: { title: string; className: string }) {
+    return (
+      <div className={className}>
+        <div className="section-title section-title-sm position-relative pb-3 mb-4">
+          <h3 className="text-light mb-0">{title}</h3>
+        </div>
+        <div className="link-animated d-flex flex-column justify-content-start">
+          {[
+            { to: '/', labelKey: 'navbar.home' },
+            { to: '/about', labelKey: 'navbar.about' },
+            { to: '/services', labelKey: 'navbar.services' },
+            { to: '/privacy', labelKey: 'pages.privacyPolicy' },
+            { to: '/terms', labelKey: 'pages.termsOfService' },
+            { to: '/blog', labelKey: 'navbar.blog' },
+            { to: '/contact', labelKey: 'navbar.contact' },
+          ].map((link, i) => (
+            <Link key={i} to={link.to} className="text-light mb-2">
+              <i className="bi bi-arrow-right text-primary me-2"></i>
+              {t(link.labelKey)}
+            </Link>
+          ))}
+        </div>
+      </div>
+    );
+  }
 }

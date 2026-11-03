@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import PageHeader from '../components/PageHeader';
+import { useTranslation } from '../context/LanguageContext';
 
-const detail = {
+const detailEn = {
   title: 'How to Build a Professional Business Website',
   category: 'Web Development',
   author: 'Logia Space Team',
@@ -22,10 +23,34 @@ const detail = {
   `,
 };
 
+const detailFr = {
+  title: 'Comment créer un site web professionnel pour entreprise',
+  category: 'Développement web',
+  author: 'Logia Space Team',
+  date: '12 Mar, 2026',
+  image: '/img/blog-1.jpg',
+  content: `
+    <p>Créer un site web professionnel pour entreprise est l\'une des étapes les plus importantes pour établir votre marque en ligne. Dans le monde numérique d\'aujourd\'hui, votre site web est souvent la première impression que les clients potentiels ont de votre entreprise.</p>
+    <h3 class="mt-4 mb-3">1. Définir vos objectifs</h3>
+    <p>Avant de commencer à concevoir ou développer, définissez clairement ce que vous voulez que votre site web accomplisse. Cherchez-vous à générer des ventes, capter des leads, ou simplement fournir des informations sur vos services ?</p>
+    <h3 class="mt-4 mb-3">2. Choisir la bonne plateforme</h3>
+    <p>Sélectionnez une plateforme alignée avec vos compétences techniques et les besoins de votre entreprise. Qu\'il s\'agisse d\'un CMS comme WordPress, un constructeur de site web, ou une application React personnalisée, le bon choix fait toute la différence.</p>
+    <h3 class="mt-4 mb-3">3. Se concentrer sur l\'expérience utilisateur</h3>
+    <p>Un site web professionnel doit être rapide, adaptable aux mobiles et facile à naviguer. Les utilisateurs doivent trouver ce qu\'ils cherchent en quelques secondes.</p>
+    <h3 class="mt-4 mb-3">4. Optimiser pour le référencement (SEO)</h3>
+    <p>Mettez en œuvre les meilleures pratiques SEO incluant les balises meta appropriées, la structure des titres, l\'optimisation des images et un contenu de qualité pour améliorer votre visibilité sur les moteurs de recherche.</p>
+    <h3 class="mt-4 mb-3">5. Lancer et maintenir</h3>
+    <p>Une fois votre site en ligne, surveillez ses performances, recueillez les retours utilisateurs et tenez le contenu à jour pour maintenir la pertinence et la sécurité.</p>
+  `,
+};
+
 export default function Detail() {
+  const { t, language } = useTranslation();
+  const detail = language === 'fr' ? detailFr : detailEn;
+
   return (
     <main>
-      <PageHeader title="Blog Detail" parent="Blog" parentTo="/blog" breadcrumb="Blog Detail" />
+      <PageHeader title={t('detail.blogDetail')} parent={t('navbar.blog')} parentTo="/blog" breadcrumb={t('detail.blogDetail')} />
       <div className="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
         <div className="container py-5">
           <div className="row g-5">
@@ -50,7 +75,7 @@ export default function Detail() {
                   <div className="blog-content" dangerouslySetInnerHTML={{ __html: detail.content }} />
                   <div className="mt-4">
                     <Link to="/blog" className="btn btn-primary me-2">
-                      <i className="bi bi-arrow-left me-2"></i>Back to Blog
+                      <i className="bi bi-arrow-left me-2"></i>{t('detail.backToBlog')}
                     </Link>
                   </div>
                 </div>
@@ -58,19 +83,19 @@ export default function Detail() {
             </div>
             <div className="col-lg-4">
               <div className="bg-light rounded p-4 wow fadeInUp" data-wow-delay="0.4s">
-                <h4 className="text-primary text-uppercase mb-4">Related Posts</h4>
+                <h4 className="text-primary text-uppercase mb-4">{t('detail.relatedPosts')}</h4>
                 <div className="row g-3">
                   <div className="col-6">
                     <div className="bg-white rounded p-3 h-100 shadow-sm">
                       <img src="/img/blog-2.jpg" alt="" className="img-fluid rounded mb-3" />
-                      <h5 className="mb-2">Why Every Startup Needs a Digital Presence</h5>
+                      <h5 className="mb-2">{t('blog.whyStartup')}</h5>
                       <small className="text-muted">05 Mar, 2026</small>
                     </div>
                   </div>
                   <div className="col-6">
                     <div className="bg-white rounded p-3 h-100 shadow-sm">
                       <img src="/img/blog-3.jpg" alt="" className="img-fluid rounded mb-3" />
-                      <h5 className="mb-2">Choosing the Right Technology for Your Project</h5>
+                      <h5 className="mb-2">{t('blog.choosingTech')}</h5>
                       <small className="text-muted">26 Feb, 2026</small>
                     </div>
                   </div>

@@ -1,19 +1,21 @@
 import { useState } from 'react';
 import { sendForm, ALERT_MESSAGES } from '../utils/emailjs';
+import { useTranslation } from '../context/LanguageContext';
 
 export default function QuoteForm() {
   const [sending, setSending] = useState(false);
+  const { t } = useTranslation();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
     const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
-    const originalText = btn?.textContent || 'Request A Quote';
+    const originalText = btn?.textContent || t('quote.requestAQuoteBtn');
 
     setSending(true);
     if (btn) {
       btn.disabled = true;
-      btn.textContent = 'Sending...';
+      btn.textContent = t('common.requesting');
     }
 
     try {
@@ -34,32 +36,32 @@ export default function QuoteForm() {
       <div className="row g-3">
         <div className="col-xl-12">
           <label>
-            <input type="text" name="name" className="form-control bg-light border-0" placeholder="Your Name" style={{ height: 55 }} />
+            <input type="text" name="name" className="form-control bg-light border-0" placeholder={t('common.yourName')} style={{ height: 55 }} />
           </label>
         </div>
         <div className="col-12">
           <label>
-            <input type="email" name="email" className="form-control bg-light border-0" placeholder="Your Email" style={{ height: 55 }} />
+            <input type="email" name="email" className="form-control bg-light border-0" placeholder={t('common.yourEmail')} style={{ height: 55 }} />
           </label>
         </div>
         <div className="col-12">
           <label>
-            <select name="service" className="form-select bg-light border-0" style={{ height: 55 }} defaultValue="Select A Service">
-              <option>Select A Service</option>
-              <option value="1">Web Development</option>
-              <option value="2">Mobile App Development</option>
-              <option value="3">Digital Marketing</option>
+            <select name="service" className="form-select bg-light border-0" style={{ height: 55 }} defaultValue={t('common.selectAService')}>
+              <option>{t('common.selectAService')}</option>
+              <option value="1">{t('common.webDevelopment')}</option>
+              <option value="2">{t('common.mobileAppDevelopment')}</option>
+              <option value="3">{t('common.digitalMarketing')}</option>
             </select>
           </label>
         </div>
         <div className="col-12">
           <label>
-            <textarea name="message" className="form-control bg-light border-0" rows={3} placeholder="Your Message" />
+            <textarea name="message" className="form-control bg-light border-0" rows={3} placeholder={t('common.message')} />
           </label>
         </div>
         <div className="col-12">
           <button className="btn btn-dark w-100 py-3" type="submit" disabled={sending}>
-            Request A Quote
+            {sending ? t('common.requesting') : t('quote.requestAQuoteBtn')}
           </button>
         </div>
       </div>

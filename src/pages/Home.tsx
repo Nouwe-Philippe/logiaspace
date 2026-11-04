@@ -2,11 +2,9 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import QuoteForm from '../components/QuoteForm';
 import ServiceCard from '../components/ServiceCard';
-import PricingCard from '../components/PricingCard';
 import TeamCard from '../components/TeamCard';
 import BlogCard from '../components/BlogCard';
 import { services } from '../data/services.json';
-import { pricing } from '../data/pricing.json';
 import { team } from '../data/team.json';
 import { testimonials } from '../data/testimonials.json';
 import { initOwlCarousels, initCounterUp, destroyOwl } from '../utils/initJqLibs';
@@ -190,22 +188,6 @@ export default function Home() {
         </div>
       </section>
       {/* Service End */}
-
-      {/* Pricing Plan Start */}
-      <div className="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
-        <div className="container py-5">
-          <div className="section-title text-center position-relative pb-3 mb-5 mx-auto" style={{ maxWidth: 600 }}>
-            <h5 className="fw-bold text-primary text-uppercase">{t('home.pricingPlans')}</h5>
-            <h1 className="mb-0">{t('home.flexiblePlans')}</h1>
-          </div>
-          <div className="row g-0">
-            {pricing.map((plan) => (
-              <PricingCard key={plan.id} plan={plan} />
-            ))}
-          </div>
-        </div>
-      </div>
-      {/* Pricing Plan End */}
 
       {/* Quote Start */}
       <div className="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
